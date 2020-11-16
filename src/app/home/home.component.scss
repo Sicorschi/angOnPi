@@ -1,0 +1,77 @@
+.inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  background-color: cornflowerblue;
+}
+
+.listUsers {
+  width: 48%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.usersCards {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.userCard {
+  max-width: 200px;
+}
+
+.createBtn {
+  width: 30%;
+  padding: 10px;
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0px;
+}
+
+.cardBtn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.spinnerBlock {
+  width: 9%;
+  margin-top: 10%;
+  margin-left: 25%;
+}
+
+.addNewUser {
+  width: 48%;
+  padding: 30px;
+}
+
+.userBlock {
+  max-width: 200px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.formContainer {
+  width: 85%;
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: cornsilk;
+}
+
+.formInput {
+  margin: 20px;
+}
+
+textarea {
+  height: 100px;
+}

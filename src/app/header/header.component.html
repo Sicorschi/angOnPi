@@ -1,0 +1,21 @@
+<div class="main" [ngClass]="{backgroundHome: header.home, backgroundPass: header.pass, backgroundStory: header.story}">
+  <button mat-raised-button class="navButton" (click)="setHomeBackground()">
+    <a style="text-decoration: none; color: white;" routerLink="/home" routerLinkActive="active">Home</a>
+  </button>
+
+  <button mat-raised-button class="navButton" (click)="setPassBackground()">
+    <a style="text-decoration: none; color: white;" routerLink="/listPass">List all p455</a>
+  </button>
+
+  <button mat-raised-button class="navButton" (click)="setPassBackground()">
+    <a style="text-decoration: none; color: white;" routerLink="/setPassForm">Set new p455</a>
+  </button>
+
+  <button mat-raised-button class="navButton" (click)="setStoryBackground()">
+    <a style="text-decoration: none; color: white;" routerLink="/left">List 411 stories</a>
+  </button>
+
+  <button mat-raised-button class="navButton" (click)="setStoryBackground()">
+    <a style="text-decoration: none; color: white;" routerLink="/right">Set new story</a>
+  </button>
+</div>

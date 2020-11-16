@@ -1,0 +1,89 @@
+<div class="inner">
+    <div class="listUsers" *ngIf="!loadingUsers" >
+        <h4>All your users</h4>
+        <div class="usersCards">
+           <!--  <div class="userBlock" *ngFor="let user of users">
+                <mat-card class="userCard">
+                    <mat-card-header>
+                      <mat-card-title>{{ user.name }}</mat-card-title>
+                      <mat-card-subtitle>{{ user.userName}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image [src]="user.imgUrl" alt="user-pic">
+                    <mat-card-content>
+                      <p>
+                        {{ user.description }}
+                      </p>
+                    </mat-card-content>
+                    <mat-card-actions class="cardBtn">
+                        <button mat-raised-button color="warn" (click)="deleteUser(user)">DELETE</button>
+                        <button mat-raised-button (click)="editUser(user)">EDIT</button>
+                      </mat-card-actions>
+                  </mat-card>
+            </div> -->
+
+            <mat-card class="userCard" *ngFor="let user of users">
+                <mat-card-header>
+                  <mat-card-title>{{ user.name }}</mat-card-title>
+                  <mat-card-subtitle>{{ user.userName}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image [src]="user.imgUrl" alt="user-pic">
+                <mat-card-content>
+                  <p>
+                    {{ user.description }}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions class="cardBtn">
+                    <button mat-raised-button color="warn" (click)="deleteUser(user)">DELETE</button>
+                    <button mat-raised-button (click)="editUser(user)">EDIT</button>
+                  </mat-card-actions>
+              </mat-card>
+        </div>
+    </div>
+
+    <div class="spinnerBlock" *ngIf="loadingUsers">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <div class="addNewUser" *ngIf="newUser">
+        <h4>
+            Add new user
+        </h4>
+        <form [formGroup]="userForm" class="formContainer">
+            <mat-form-field appearance="outline" class="formInput">
+                <mat-label>
+                    Name
+                </mat-label>
+                <input matInput type="text" formControlName="name" required autocomplete="off">
+                <mat-hint>Think of someone you hate</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="formInput">
+                <mat-label>
+                    Password
+                </mat-label>
+                <input matInput type="text" formControlName="password" required autocomplete="off">
+                <mat-hint>Create short password with the previous name</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="formInput">
+                <mat-label>
+                    Description
+                </mat-label>
+                <textarea matInput type="text" formControlName="description" required autocomplete="off"></textarea>
+                <mat-hint>Point the most important things</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="formInput">
+                <mat-label>
+                    Img Url
+                </mat-label>
+                <input matInput type="text" formControlName="imgUrl" required autocomplete="off">
+                <mat-hint>Search some internet shit img and copy the url</mat-hint>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="createNewUser()" class="createBtn">
+                Create new User
+            </button>
+        </form>
+    </div>
+
+</div>
