@@ -22,4 +22,8 @@ export class MainStreamService {
   deleteUser(id: number | undefined): Observable<any> {
     return this.http.delete(this.URL_API + `/users/delete/${id}`);
   }
+
+  editUser(user: User): Observable<User> {
+    return this.http.post(this.URL_API + `/users/edit/${user.id}`, user);
+  }
 }

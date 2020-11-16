@@ -2,25 +2,6 @@
     <div class="listUsers" *ngIf="!loadingUsers" >
         <h4>All your users</h4>
         <div class="usersCards">
-           <!--  <div class="userBlock" *ngFor="let user of users">
-                <mat-card class="userCard">
-                    <mat-card-header>
-                      <mat-card-title>{{ user.name }}</mat-card-title>
-                      <mat-card-subtitle>{{ user.userName}}</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image [src]="user.imgUrl" alt="user-pic">
-                    <mat-card-content>
-                      <p>
-                        {{ user.description }}
-                      </p>
-                    </mat-card-content>
-                    <mat-card-actions class="cardBtn">
-                        <button mat-raised-button color="warn" (click)="deleteUser(user)">DELETE</button>
-                        <button mat-raised-button (click)="editUser(user)">EDIT</button>
-                      </mat-card-actions>
-                  </mat-card>
-            </div> -->
-
             <mat-card class="userCard" *ngFor="let user of users">
                 <mat-card-header>
                   <mat-card-title>{{ user.name }}</mat-card-title>
@@ -44,9 +25,12 @@
         <mat-spinner></mat-spinner>
     </div>
 
-    <div class="addNewUser" *ngIf="newUser">
-        <h4>
+    <div class="addNewUser">
+        <h4 *ngIf="newUser">
             Add new user
+        </h4>
+        <h4 *ngIf="!newUser">
+            {{ user.name }}
         </h4>
         <form [formGroup]="userForm" class="formContainer">
             <mat-form-field appearance="outline" class="formInput">
@@ -80,8 +64,15 @@
                 <input matInput type="text" formControlName="imgUrl" required autocomplete="off">
                 <mat-hint>Search some internet shit img and copy the url</mat-hint>
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="createNewUser()" class="createBtn">
-                Create new User
+            <button *ngIf="newUser" mat-raised-button color="primary" (click)="createNewUser()" class="createBtn">
+                <span>
+                    Create new user
+                </span>
+            </button>
+            <button *ngIf="!newUser" mat-raised-button color="primary" (click)="sendEditUser()" class="createBtn">
+                <span *ngIf="!newUser">
+                    Edit user
+                </span>
             </button>
         </form>
     </div>

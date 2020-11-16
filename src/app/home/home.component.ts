@@ -11,9 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class HomeComponent implements OnInit {
   users: User[] = [];
+  user: User = {};
   userForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    userName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     imgUrl: new FormControl('', Validators.required)
@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.user);
     this.mainService.getAllUsers().subscribe(
       (users: User[]) => {
         this.users = users;
@@ -62,22 +63,58 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  deleteUser(user: User): void {
-    console.log(user);
-    const id = user.id;
-    this.mainService.deleteUser(id).subscribe(
-      (jsonMessage) => {
-        this.snackBar.open(jsonMessage.message, 'X', {
+  sendEditUser(): void {
+    this.loadingUsers = true;
+    const editUser = this.getNewUserData();
+    editUser.id = this.user.id;
+    this.mainService.editUser(editUser).subscribe(
+      () => {
+        this.snackBar.open('The user is succesfully edit', 'X', {
           duration: 3000,
           horizontalPosition: 'end',
           verticalPosition: 'top'
         });
+        this.getAllUsers();
+        this.cleanUserForm();
+      }
+    )
+  }
+
+  cleanUserForm(): void {
+    this.userForm.setValue({
+      name: '',
+      password: '',
+      description: '',
+      imgUrl: ''
+    });
+  }
+
+  deleteUser(user: User): void {
+    this.loadingUsers = true;
+    console.log(user);
+    const id = user.id;
+    this.mainService.deleteUser(id).subscribe(
+      () => {
+        this.snackBar.open('The user is succesfully destroyed', 'X', {
+          duration: 3000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+        this.getAllUsers();
       }
     );
   }
 
   editUser(user: User): void {
+    this.user = user;
+    this.newUser = false;
     console.log(user);
+    this.userForm.patchValue({
+      name: user.name,
+      password: user.password,
+      description: user.description,
+      imgUrl: user.imgUrl
+    });
   }
 
   getNewUserData(): User {
